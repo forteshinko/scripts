@@ -1,0 +1,6 @@
+#lang racket
+
+; pvec->index: pvec -> index:
+; Changes a permutation vector into an index.
+(define (pvec->index pvec1)
+  

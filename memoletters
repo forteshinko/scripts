@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+
+import random
+
+edges = [['a','q'],['b','m'],['c','i'],['d','e'],['f','l'],['g','x'],['h','r'],['j','p'],['k','u'],['n','t'],['o','v'],['s','w']]
+corners = [['a','e','r'],['b','q','n'],['c','m','j'],['d','i','f'],['u','g','l'],['v','k','p'],['w','o','t'],['x','s','h']]
+
+def lettergen():
+	displayprompt = 'Corners(c) or edges(e)?\nHow many letters?\n'
+	errormessage = 'Use better format; try again!\n'
+	inputstring = raw_input(displayprompt)
+	while inputstring != 'quit':
+		splitstrings = inputstring.split()
+		if len(splitstrings) == 1:
+			first = splitstrings[0]
+			if first == '':
+				pass
+			else:
+				try:
+					piecenum = int(first)
+				except:
+					piecetype = first
+		else:
+			piecetype = splitstrings[0]
+			piecenum = int(splitstrings[1])
+		if piecetype == 'c':
+			lettergroups = random.sample(corners,piecenum)
+		else:
+			lettergroups = random.sample(edges,piecenum)
+		letters = [random.choice(i) for i in lettergroups]
+		print ''.join(letters)
+		inputstring = raw_input(displayprompt + typeprompt + ', ' + str(piecenum) + ': ')

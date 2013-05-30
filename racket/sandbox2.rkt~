@@ -1,0 +1,8 @@
+#lang racket
+(define (plus x y) (+ x y))
+(define (+ x y)
+  (printf "Hello")
+  (newline)
+  (plus x y))
+
+(plus 3 5)

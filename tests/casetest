@@ -1,0 +1,5 @@
+#!/bin/bash
+
+read x
+case $x echo 4
+esac

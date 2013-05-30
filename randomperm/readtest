@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo 'I will add potato to the end of your string:'
+read permthings
+
+for i in $permthings
+do
+echo ${i}potato
+done

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "#!/bin/rm" > rmtest
+echo 'echo "yo!"' >> rmtest
+chmod 700 rmtest

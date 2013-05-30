@@ -1,0 +1,42 @@
+#lang racket
+(require test-engine/racket-tests)
+(provide (all-defined-out))
+
+;; pvec->index: pvec -> index
+;; Changes a permutation vector into an index.
+(define (pvec->index pvec1)
+  (local
+    [(define t 0)]
+    (begin
+      (for ([i 2])
+        (set! t (* t (- 3 i)))
+        (for ([j (in-range (+ i 1) 3)])
+          (cond [(> (vector-ref pvec1 i) (vector-ref pvec1 j))
+                 (set! t (+ t 1))])))
+      t)))
+;; Tests:
+(check-expect (pvec->index #(0 1 2)) 0)
+(check-expect (pvec->index #(0 2 1)) 1)
+(check-expect (pvec->index #(1 0 2)) 2)
+(check-expect (pvec->index #(1 2 0)) 3)
+(check-expect (pvec->index #(2 0 1)) 4)
+(check-expect (pvec->index #(2 1 0)) 5)
+
+;; index->pvec: index -> pvec
+;; Changes an index into a permutation vector.
+(define (index->pvec ind1)
+  (local
+    [(define pvec1 (make-vector 3))
+     (define t ind1)]
+    (begin
+      (for ([i 2])
+        (vector-set! pvec1 (- 1 i) (modulo t (+ i 2)))
+        (set! t (quotient t (+ i 2)))
+        (for ([j (in-range (- 2 i) 3)])
+          (cond [(>= (vector-ref pvec1 j) (vector-ref pvec1 (- 1 i)))
+                 (vector-set! pvec1 j (+ (vector-ref pvec1 j) 1))])))
+      pvec1)))
+
+(check-expect (index->pvec 0) #(0 1 2))
+(check-expect (index->pvec 1) #(0 2 1))
+(check-expect (index->pvec 3) #(1 2 0))

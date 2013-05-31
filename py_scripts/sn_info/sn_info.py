@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
-import csv
-import pprint
-import datetime
+import csv,datetime,pprint
+from os.path import expanduser
 
-infile = 'sninc.csv'
+infile = expanduser('~/google_drive/d2l/sn/sn_inc.csv')
 
-def snstats(sninc):
-	line_count = sum(1 for line in open(sninc,'r')) - 1
-	f = open(sninc,'r')
+def sn_info(sn_csv):
+	line_count = sum(1 for line in open(sn_csv,'r')) - 1
+	f = open(sn_csv,'r')
 	csvfile = csv.reader(f)
 	header =  csvfile.__next__()
 	for i in range(len(header)):
@@ -57,4 +56,4 @@ def snstats(sninc):
 				new_rate = contact_type_dict[ctype] * i * j / (date_count * rep_count)
 				new_thing = ctype + ' inc per %d day per %d rep: %f\n' % (i,j,new_rate)
 				print(new_thing)
-snstats(infile)
+sn_info(infile)

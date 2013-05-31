@@ -1,10 +1,12 @@
 #!/usr/bin/jc
 
-fooa=:3 :0 NB. =: is important
-zzz+y
+test1=:3 :0
+t1=.3+y
 )
-zzz=:23
-foob=:3 :0
-zzz=.7
-zzz+y
+
+test2=:3 :0
+t2=.4+y
+:
+t2=.17
+t2+x+y
 )
